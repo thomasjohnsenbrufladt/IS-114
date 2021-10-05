@@ -10,26 +10,54 @@
 <!-- Issue se https://html.spec.whatwg.org/multipage/forms.html#introduction-4 -->
 <hr>
 <form>
-    <p><label for="data01">Data inn felt #1</label>
-        <input type="text" name="data01" id="data01" /></p>
+    <p><label for="data01">Navn</label>
+        <input type="text" name="Navn" id="data01" /></p>
 
-    <p><label for="data02">Data inn felt #2</label>
-        <input type="text" name="data02" id="data02" /></p>
+    <p><label for="data02">Alder</label>
+        <input type="text" name="Alder" id="data02" /></p>
 
-    <p>HowWeRoll-parametre:</p>
+    <p>How do we roll? </p>
 
     <p>
-        <!-- dorn - day or night -->
-        <label for="dorn">Morgenfugl</label>
+        <!-- Work together - Work alone -->
+        <label for="dorn">Jobbe sammen</label>
         <input type="range" id="dorn" name="dorn" value="50">
-        <label for="dorn">Nattugle</label>
+        <label for="dorn">Jobbe alene</label>
     </p>
 
     <p>
-        <!-- cora - cooperate or alone -->
-        <label for="cora">Jobbe med det sammen</label>
+        <!-- Whole story - Cut to the chase -->
+        <label for="cora">Si meg hele historien</label>
         <input type="range" id="cora" name="cora" value="50">
-        <label for="cora">Gå for seg selv og tenke</label>
+        <label for="cora">Kom til punktet</label>
+    </p>
+
+    <p>
+    <!-- Whole process - Task -->
+    <label for="alpha">Ta meg gjennom hele prosjektet</label>
+    <input type="range" id="alpha" name="alpha" value="50">
+    <label for="alpha">Gi meg en oppgave</label>
+    </p>
+
+    <p>
+    <!-- Only work at work - Working whenever I feel like it -->
+    <label for="beta">Jobber bare på jobb</label>
+    <input type="range" id="beta" name="beta" value="50">
+    <label for="beta">Jobbe når jeg føler for det</label>
+    </p>
+
+   <p>
+    <!-- Ongoing feedback - Feedback following tasks -->
+    <label for="charlie">Kontinuerlig feedback</label>
+    <input type="range" id="charlie" name="charlie" value="50">
+    <label for="charlie">Feedback etter lansering</label>
+    </p>
+
+    <p>
+        <!-- 9-5 - working when I want to -->
+        <label for="delta">09-17</label>
+        <input type="range" id="delta" name="delta" value="50">
+        <label for="delta">Jobbe når jeg vil</label>
     </p>
 
     <p>
@@ -42,11 +70,11 @@
         </label>
     </p>
 
-    <button type="submit">Gjør noe</button>
+    <button type="submit">Send inn svar</button>
 </form>
 
 <div class="results">
-    <h2>Form Data</h2>
+    <h2>Resultater</h2>
     <pre></pre>
 </div>
 
