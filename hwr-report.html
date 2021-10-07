@@ -1,0 +1,43 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TITTEL</title>
+
+</head>
+<body>
+
+    <!-- Her skal dataen bli vist -->
+    <div class="output"></div>
+
+<script>
+
+    fetch('https://bacit.info/hwr/20211006204004-c4c27588f37eb5b4578fe4e1b74a2fce.json')
+    .then(response => response.json())
+    .then((data) => {
+            // Loop gjennom dataen
+            for (const [key, value] of Object.entries(data)) {
+                    //         daten som vi hentet -----^
+                    //
+                    // Notater:
+                    //  Eksempel "key" = "navn"
+                    //  Eksempel "value" = "Thomas"
+
+                    // 1. Vi finner elementet som har en "class" som heter "output".
+                    // 2. Legger til "KEY: VALUE" til teksten av det elementet
+                    // Grunnen til av vi bruker "<br>" er for å et nytt linje
+                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
+                    //                      Dette kan vær "navn" -----^
+                    //                            Dette kan vær "Thomas" -----^
+
+                    // MEN HUSK at veridien av KEY og VALUE blir endret fordi går gjennom alle KEYene og VALUEne
+            }
+        })
+
+</script>
+</body>
+</html>
+
