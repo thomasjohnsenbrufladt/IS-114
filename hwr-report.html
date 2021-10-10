@@ -45,89 +45,229 @@
         <a href="./how-we-roll.html">How we roll</a>
         <a class="active" href="./hwr-report.html">HWR-rapport</a>
     </div>
+
+    <figure>
+        <figcaption>Testing SVG for HowWeRoll</figcaption>
+        <div>Jobbe i team - Jobbe alene</div>
+        <!-- For SVG spesifikasjon se her https://svgwg.org/svg2-draft/ (sist sett 2021-10-06) -->
+        <!-- Eksempel basert på https://developer.mozilla.org/en-US/docs/Web/SVG/Element (sist sett 2021-10-06) -->
+        <svg id="hwrsvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                @font-face {
+                    font-family: 'RichEatinAllCaps';
+                    src: url('https://fontlibrary.org/assets/fonts/rich-eatin/b87b6710407b471d270f62fb7c520855/32b2ff4fff9698a7b8d22b8d543e3fdb/RichEatinAllCaps.otf') format('opentype');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+                .minfont {
+                    font-family: 'RichEatinAllCaps';
+                    font-weight: normal;
+                    font-style: normal;
+                    font-size: 0.3em;
+                }
+            </style>
+            <g>
+                <text x="0" y="4" dy=".45em" class="minfont">Team</text>
+                <line x1="0" y1="10" x2="100" y2="10" stroke="#000000" stroke-width="0.5" />
+                <circle id="Thomas" cx="30" cy="10" r="1.5" fill="#ff0000"/>
+                <circle id="Tobias" cx="30" cy="10" r="1.5" fill="#0080ff"/>
+                <circle id="Victor" cx="30" cy="10" r="1.5" fill="#CF8BFC"/>
+                <circle id="Rayan" cx="30" cy="10" r="1.5" fill="#14e810"/>
+                <circle id="Siren" cx="30" cy="10" r="1.5" fill="#f7f707"/>
+                <circle id="Kasper" cx="30" cy="10" r="1.5" fill="#11def5"/>
+
+                <text x="85" y="4" dy=".45em" class="minfont">Alene</text>
+            </g>
+
+        </svg>
+    </figure>
     <!-- Her skal dataen bli vist -->
     <div class="output"></div>
 
     <script>
+        // Pseudocode
+        // Modellering først: hvilke SVG elementer, hvor stort areal, posisjonring, hensyn til zooming ...
+        // 1) finn knaggen til svg elementet i HTML dokumentets DOM-tre
+        // 2) selektere og lagre knagger til alle gruppeelementer i svg
+        // (forutsetter modellering i forveien)
+        // 3) selektere og lagre knagger til circle-elementer i g-elementet
+        // (forutsetter modellering)
+        // 4) sette dorn-verdien fra inndata (JSON) til verdien som bestemmer sirkelens posisjon på linjen
+        let minsvg = document.getElementById("hwrsvg");
+        let glist = minsvg.getElementsByTagName("g");
+        let circles = glist[0].getElementsByTagName("circle")
+        console.log(circles[0].cx.baseVal.value);
 
-        fetch('https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf.json')
-    .then(response => response.json())
-    .then((data) => {
-            // Loop gjennom dataen
-            for (const [key, value] of Object.entries(data)) {
-                    //         daten som vi hentet -----^
-                    //
-                    //  Eksempel "key" = "navn"
-                    //  Eksempel "value" = "Thomas"
-
-                    // 1. Vi finner elementet som har en "class" som heter "output".
-                    // 2. Legger til "KEY: VALUE" til teksten av det elementet
-                    // Grunnen til av vi bruker "<br>" er for å et nytt linje
-                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
-                    //                      Dette kan vær "navn" -----^
-                    //                            Dette kan vær "Thomas" -----^
-            }
-        })
-
-
-
-
-
-        fetch('https://bacit.info/hwr/20211009110017-a933787b61a351285706deb1ef63a10e.json')
-    .then(response => response.json())
-    .then((data) => {
-            for (const [key, value] of Object.entries(data)) {
-                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
-            }
-        })
-
-
+        // Mock JSON
+        const minJSON = '{"tora": "60"}';
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse (sist sett 2021-10-06)
+        const jsobj = JSON.parse(minJSON);
+        console.log(jsobj.tora);
+        toraValueForThomas = jsobj.tora;
+        toraValueForTobias = jsobj.tora;
+        toraValueForVictor = jsobj.tora;
+        toraValueForRayan = jsobj.tora;
+        toraValueForSiren = jsobj.tora;
+        toraValueForKasper = jsobj.tora;
+        // Dette kan ikke gjøres før inndata er lastet inn i nettleserens minneområdet
+        circles.Thomas.cx.baseVal.value = toraValueForThomas;
+        circles.Tobias.cx.baseVal.value = toraValueForTobias;
+        circles.Victor.cx.baseVal.value = toraValueForVictor;
+        circles.Rayan.cx.baseVal.value = toraValueForRayan;
+        circles.Siren.cx.baseVal.value = toraValueForSiren;
+        circles.Kasper.cx.baseVal.value = toraValueForKasper;
 
 
+        //  JSON fra link
+        fetch("https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf .json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Thomas.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211009110017-a933787b61a351285706deb1ef63a10e.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Tobias.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211009110534-03185cd07d5d63f26ba2071f11e93435.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Victor.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211010104022-71e96f3e4de85ef8df6dae76d9fc5618.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Rayan.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211009111232-09d157480630fd37f941a1917d74a3be.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Siren.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211010105420-6f3d5e802b865db6f7f889073a18c24d.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Kasper.cx.baseVal.value = data.tora;
+            });
 
-         fetch('https://bacit.info/hwr/20211009110534-03185cd07d5d63f26ba2071f11e93435.json')
-    .then(response => response.json())
-    .then((data) => {
-            for (const [key, value] of Object.entries(data)) {
-                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
-            }
-        })
+
+    </script>
+    <figure>
+        <figcaption>Testing SVG for HowWeRoll</figcaption>
+        <div>Jobbe i team - Jobbe alene</div>
+        <!-- For SVG spesifikasjon se her https://svgwg.org/svg2-draft/ (sist sett 2021-10-06) -->
+        <!-- Eksempel basert på https://developer.mozilla.org/en-US/docs/Web/SVG/Element (sist sett 2021-10-06) -->
+        <svg id="hwrsvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                @font-face {
+                    font-family: 'RichEatinAllCaps';
+                    src: url('https://fontlibrary.org/assets/fonts/rich-eatin/b87b6710407b471d270f62fb7c520855/32b2ff4fff9698a7b8d22b8d543e3fdb/RichEatinAllCaps.otf') format('opentype');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+                .minfont {
+                    font-family: 'RichEatinAllCaps';
+                    font-weight: normal;
+                    font-style: normal;
+                    font-size: 0.3em;
+                }
+            </style>
+            <g>
+                <text x="0" y="4" dy=".45em" class="minfont">Team</text>
+                <line x1="0" y1="10" x2="100" y2="10" stroke="#000000" stroke-width="0.5" />
+                <circle id="Thomas" cx="30" cy="10" r="1.5" fill="#ff0000"/>
+                <circle id="Tobias" cx="30" cy="10" r="1.5" fill="#0080ff"/>
+                <circle id="Victor" cx="30" cy="10" r="1.5" fill="#CF8BFC"/>
+                <circle id="Rayan" cx="30" cy="10" r="1.5" fill="#14e810"/>
+                <circle id="Siren" cx="30" cy="10" r="1.5" fill="#f7f707"/>
+                <circle id="Kasper" cx="30" cy="10" r="1.5" fill="#11def5"/>
+
+                <text x="85" y="4" dy=".45em" class="minfont">Alene</text>
+            </g>
+
+        </svg>
+    </figure>
+    <!-- Her skal dataen bli vist -->
+    <div class="output"></div>
+
+    <script>
+        // Pseudocode
+        // Modellering først: hvilke SVG elementer, hvor stort areal, posisjonring, hensyn til zooming ...
+        // 1) finn knaggen til svg elementet i HTML dokumentets DOM-tre
+        // 2) selektere og lagre knagger til alle gruppeelementer i svg
+        // (forutsetter modellering i forveien)
+        // 3) selektere og lagre knagger til circle-elementer i g-elementet
+        // (forutsetter modellering)
+        // 4) sette dorn-verdien fra inndata (JSON) til verdien som bestemmer sirkelens posisjon på linjen
+        let minsvg = document.getElementById("hwrsvg");
+        let glist = minsvg.getElementsByTagName("g");
+        let circles = glist[0].getElementsByTagName("circle")
+        console.log(circles[0].cx.baseVal.value);
+
+        // Mock JSON
+        const minJSON = '{"horp": "60"}';
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse (sist sett 2021-10-06)
+        const jsobj = JSON.parse(minJSON);
+        console.log(jsobj.horp);
+        toraValueForThomas = jsobj.tora;
+        toraValueForTobias = jsobj.tora;
+        toraValueForVictor = jsobj.tora;
+        toraValueForRayan = jsobj.tora;
+        toraValueForSiren = jsobj.tora;
+        horpValueForKasper = jsobj.horp;
+        // Dette kan ikke gjøres før inndata er lastet inn i nettleserens minneområdet
+        circles.Thomas.cx.baseVal.value = toraValueForThomas;
+        circles.Tobias.cx.baseVal.value = toraValueForTobias;
+        circles.Victor.cx.baseVal.value = toraValueForVictor;
+        circles.Rayan.cx.baseVal.value = toraValueForRayan;
+        circles.Siren.cx.baseVal.value = toraValueForSiren;
+        circles.Kasper.cx.baseVal.value = horpValueForKasper;
 
 
+        //  JSON fra link
+        fetch("https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf .json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Thomas.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211009110017-a933787b61a351285706deb1ef63a10e.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Tobias.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211009110534-03185cd07d5d63f26ba2071f11e93435.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Victor.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211010104022-71e96f3e4de85ef8df6dae76d9fc5618.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Rayan.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211009111232-09d157480630fd37f941a1917d74a3be.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Siren.cx.baseVal.value = data.tora;
+            });
+        fetch("https://bacit.info/hwr/20211010105420-6f3d5e802b865db6f7f889073a18c24d.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                circles.Kasper.cx.baseVal.value = data.horp;
+            });
 
-
-
-         fetch('https://bacit.info/hwr/20211010104022-71e96f3e4de85ef8df6dae76d9fc5618.json')
-    .then(response => response.json())
-    .then((data) => {
-            for (const [key, value] of Object.entries(data)) {
-                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
-            }
-        })
-
-
-
-
-
-         fetch('https://bacit.info/hwr/20211009111232-09d157480630fd37f941a1917d74a3be.json')
-    .then(response => response.json())
-    .then((data) => {
-            for (const [key, value] of Object.entries(data)) {
-                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
-            }
-        })
-
-
-
-
-
-         fetch('https://bacit.info/hwr/20211010105420-6f3d5e802b865db6f7f889073a18c24d.json')
-    .then(response => response.json())
-    .then((data) => {
-            for (const [key, value] of Object.entries(data)) {
-                    document.querySelector(".output").innerHTML += `${key}: ${value} <br>`
-            }
-        })
 
     </script>
 </body>
