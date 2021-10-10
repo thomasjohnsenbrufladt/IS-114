@@ -35,14 +35,17 @@
     </style>
 </head>
 
+<!-- Dette linker mellom de forskjellige sidene med bruk av href.-->
 <body style="background-color:#94AEB3;">
 <div class="topnav">
     <a href="index.html">Hjem</a>
     <a class="active" href="./how-we-roll.html">How we roll</a>
     <a href="./hwr-report.html">HWR-rapport</a>
 </div>
-<!-- Her skrives alt innhold, som man ønsker å "tegne" på skjermen. -->
-<!-- Issue se https://html.spec.whatwg.org/multipage/forms.html#introduction-4 -->
+
+<!-- Her er da input felt ved bruk av forms, som man skriver navn, alder, samt hvordan man jobber. Dette er info vi får hentet ut senere ved hjelp av trxid.
+Vi endret ikke data01, eller data02, fordi vi synes navnene passet godt inn. Det gjør det lettere å søke og skaper system på koden i større prosjekter. -->
+
 <hr>
 <form>
     <p><label for="data01">Navn</label>
@@ -52,9 +55,16 @@
         <input type="text" name="Alder" id="data02" /></p>
 
     <p>How do we roll? </p>
+    
+    <!-- Her valgte vi å navngi labelene for den "tungeste" bokstaven i hvert spørsmål, og med "or" i mellom. Skaper mer
+    oversikt enn f.eks alpha, beta, charlie som vi orginalt brukte.-->
 
-    <p>
-        <!-- Work together - Work alone -->
+    <!-- På koden nedenfor er det spørsmål om å jobbe i team eller jobbe alene. "Team" og "Alene" er de viktigste ordene her så det ble tora
+     Det er flere typer input types, vi brukte text og range. Range lager en slider, vi har valgt at den skal gå fra 0 til 100. Starter midt på.-->
+
+
+        <p>
+            <!-- Work in a team - Work alone -->
         <label for="tora">Jobbe i team</label>
         <input type="range" id="tora" name="tora" value="50">
         <label for="tora">Jobbe alene</label>
@@ -68,7 +78,7 @@
     </p>
 
     <p>
-    <!-- Whole process - Task -->
+    <!-- Take me through the whole process - Just give me a task -->
     <label for="poro">Inkluder meg i hele prosessen</label>
     <input type="range" id="poro" name="poro" value="50">
     <label for="poro">Gi meg en oppgave</label>
@@ -89,14 +99,19 @@
     </p>
 
     <p>
-        <!-- 9-5 - working when I want to -->
+        <!-- I prefer public recognition - I prefer private recognition -->
         <label for="oort">Jeg foretrekker offentlig anerkjennelse</label>
         <input type="range" id="oort" name="oort" value="50">
         <label for="oort">Jeg foretrekker anerkjennelse på tomannshånd</label>
     </p>
 
+    <!-- Button for å sende inn svar. -->
+
     <button type="submit">Send inn svar</button>
 </form>
+
+<!-- div class results viser personens resultater under, dette viser hva de har svart, og den trxid og tid sendt inn.
+ Både trxid og time trengs får å jobbe videre med dataen. <div class="results" linkes med JS.-->
 
 <div class="results">
     <h2>Resultater</h2>
