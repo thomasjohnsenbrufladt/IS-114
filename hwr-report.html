@@ -35,21 +35,20 @@
             background-color: #04AA6D;
             color: white;
         }
-
     </style>
-
 </head>
+    
 <!-- Endrer bakgrunnsfare på body ved style. Bruker div tag for å lage en "class" som brukes i head for å definere koden. "active" beskriver hvilken fil man står i. -->
 <body style="background-color:#94AEB3;">
-<div class="topnav">
-    <a href="index.html">Hjem</a>
-    <a href="./how-we-roll.html">How we roll</a>
-    <a class="active" href="./hwr-report.html">HWR-rapport</a>
-</div>
+    <div class="topnav">
+        <a href="index.html">Hjem</a>
+        <a href="./how-we-roll.html">How we roll</a>
+        <a class="active" href="./hwr-report.html">HWR-rapport</a>
+    </div>
     <!-- Her skal dataen bli vist -->
     <div class="output"></div>
 
-<script>
+    <script>
 
         fetch('https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf.json')
     .then(response => response.json())
@@ -130,7 +129,7 @@
             }
         })
 
-</script>
+    </script>
 </body>
 </html>
 
