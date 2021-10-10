@@ -120,24 +120,27 @@ Vi endret ikke data01, eller data02, fordi vi synes navnene passet godt inn. Det
 </div>
 
 <script>
-    // From https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch (seen 2021-09-27)
-    // Example POST method implementation using fetch:
+    // Hentet https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch den 02.10.2021
     async function postData(url = '', data = {}) {
-        // Default options are marked with *
         const response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache,only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+            method: 'POST', // Post blir brukt til å sende data til servere.
+            mode: 'cors', // Setter forespørselsmodus, CORS = Cross-origin resource sharing.
+            cache: 'no-cache', // Gir en beskjed at informasjon ikke skal oppbevares.
+            credentials: 'same-origin', // Definerer at det kommer fra samme calling script
+            //  Hentet fra https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials den 10.10.2021
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                // Sørger for at value blir returnert
+                // Hentet fra https://developer.mozilla.org/en-US/docs/Web/API/Headers den 10.10.2021
             },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer,*no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(data) // body data type must match"Content-Type"header
+            redirect: 'follow', // Tar opp value fra headers, sender videre.
+            referrerPolicy: 'no-referrer', // Sørger for at sendte forespørsler ikke inneholder noe informasjon
+            // Hentet fra https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy den 10.10.2021
+            body: JSON.stringify(data) // Konverter data objekt eller value til JSON string.
+            // Hentet fra https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify den 10.10.2021
         });
-        return response.json(); // parses JSON response into native JavaScriptobjects
+        return response.json(); // Stringer sammen JSON repons til JavascriptObjects
+        // Hentet fra https://github.com/digitnow/how-we-roll/blob/main/how-we-roll.html den 10.10.2021
     }
 
     function handleSubmit(event) {
@@ -152,6 +155,8 @@ Vi endret ikke data01, eller data02, fordi vi synes navnene passet godt inn. Det
     }
     const form = document.querySelector('form');
     form.addEventListener('submit', handleSubmit);
+    // Lager dataen ut av det som har blitt fylt inn i de forskjellige feltene, og viser resultatene fra JSON.
+
 </script>
 </body>
 </html>
