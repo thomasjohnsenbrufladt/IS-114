@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data fra JSON-fil</title>
+    <style>
+
+    </style>
+    <!--
+
+       [[[[[[[[     [[[[[[[[        [[[[   [[[[   [[[[  [[[[
+       [::::::[    [::[             [::[   [::[   [::[  [::[
+         [::[      [::[             [::[   [::[   [::[  [::[
+         [::[       [::::[   [[[[   [::[   [::[   [[[[[[[[[[
+         [::[          [::[         [::[   [::[         [::[
+       [::::::[        [::[         [::[   [::[         [::[
+       [[[[[[[[   [[[[[[[[          [[[[   [[[[         [[[[
+
+    -->
+</head>
+<body>
+<div id="debug"></div>
+<canvas id="report"></canvas>
+<!-- Her skrives alt innhold, som man ønsker å "tegne" på skjermen. -->
+<script>
+    <!-- Her skrives kode i JavaScript som "gir liv" til bilde på skjermen. -->
+
+    var canvas = document.getElementById('report');
+    var context = canvas.getContext('2d');
+
+
+    fetch("https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.querySelector("#debug").innerText = data.data01 + " " + data
+                .dorn + " " + data.cora;
+
+            var canvas = document.getElementById('report');
+            var context = canvas.getContext('2d');
+
+            //Teksten i ' ' er synlig tekst.
+            //4 tegn høyere for at teksten ikke skal være på lija.
+            context.font = '14px serif';
+            context.fillText('tora', 30, 24);
+            context.fillText('horp', 30, 74);
+            context.fillText('poro', 30, 124);
+            context.fillText('forf', 30, 174);
+            context.fillText('korl', 30, 224);
+            context.fillText('oort', 30, 274);
+
+            //Tegning av linjer
+            context.beginPath();
+            context.moveTo(70,20);
+            context.lineTo(170,20);
+
+            context.moveTo(70,70);
+            context.lineTo(170,70);
+            context.stroke();
+
+            context.moveTo(70,120);
+            context.lineTo(170,120);
+            context.stroke();
+
+            context.moveTo(70,170);
+            context.lineTo(170,170);
+            context.stroke();
+
+            context.moveTo(70,220);
+            context.lineTo(170,220);
+            context.stroke();
+
+            context.moveTo(70,270);
+            context.lineTo(170,270);
+            context.stroke();
+
+            //context.beginPath();
+
+
+
+            var X = 70 + parseInt(data.tora, 10);
+            var Y = 20;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+
+            var X = 70 + parseInt(data.horp, 10);
+            var Y = 70;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 70 + parseInt(data.poro, 10);
+            var Y = 120;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 70 + parseInt(data.forf, 10);
+            var Y = 170;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 70 + parseInt(data.korl, 10);
+            var Y = 220;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 70 + parseInt(data.oort, 10);
+            var Y = 270;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+        });
+
+
+</script>
+</body>
+</html>
