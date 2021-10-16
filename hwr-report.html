@@ -36,158 +36,578 @@
             color: white;
         }
 
-       .peoplecolor
-       {
-          font-size: 34px;
-       }
+        ul li { display: inline; white-space: pre;font-size: 20px;}
+        ul li:last-child:after { content: ""; }
 
-      .red
-      {
-          color:#ff0000 ;
-      }
-        .darkblue
-        {
-            color:#0080ff ;
+
+        .thomas::before{
+            content: "• ";
+            color: #ff0000;
         }
-        .lightblue
-        {
-            color:#11def5;
+        .tobias::before{
+            content: "• ";
+            color: #0080ff;
+            margin-left:5px;
         }
-        .yellow
-        {
-            color:#f7f707 ;
+        .victor::before{
+            content: "• ";
+            color: #CF8BFC;
+            margin-left:5px;
         }
-        .purple
-        {
-            color:#CF8BFC ;
+        .rayan::before{
+            content: "• ";
+            color: #14e810;
+            margin-left:5px;
         }
-        .green
-        {
-            color:#14e810 ;
+        .siren::before{
+            content: "• ";
+            color: #f7f707;
+            margin-left:5px;
+        }
+        .kasper::before{
+            content: "• ";
+            color: #11def5;
+            margin-left:5px;
         }
     </style>
+
 </head>
-    
-<!-- Endrer bakgrunnsfare på body ved style. Bruker div tag for å lage en "class" som brukes i head for å definere koden. "active" beskriver hvilken fil man står i. -->
 <body style="background-color:#94AEB3;">
-    <div class="topnav">
-        <a href="index.html">Hjem</a>
-        <a href="./how-we-roll.html">How we roll</a>
-        <a class="active" href="./hwr-report.html">HWR-rapport</a>
-    </div>
+<div id="debug"></div>
+<div class="topnav">
+    <a href="index.html">Hjem</a>
+    <a href="./how-we-roll.html">How we roll</a>
+    <a class="active" href="./hwr-report.html">HWR-rapport</a>
+</div>
 
-    <div class="peoplecolor">
-        <p>
-            <span class="red">Thomas</span> <span class="darkblue">Tobias</span> <span class="lightblue">Kasper</span> <span class="yellow">Siren</span> <span class="purple">Victor</span> <span class="green">Rayan</span>
-        </p>
-    </div>
-    <figure>
-        <!-- For SVG spesifikasjon se her https://svgwg.org/svg2-draft/ (sist sett 2021-10-06) -->
-        <!-- Eksempel basert på https://developer.mozilla.org/en-US/docs/Web/SVG/Element (sist sett 2021-10-06) -->
-        <svg id="hwrsvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <style>
-                @font-face {
-                    font-family: 'RichEatinAllCaps';
-                    src: url('https://fontlibrary.org/assets/fonts/rich-eatin/b87b6710407b471d270f62fb7c520855/32b2ff4fff9698a7b8d22b8d543e3fdb/RichEatinAllCaps.otf') format('opentype');
-                    font-weight: normal;
-                    font-style: normal;
-                }
-                .minfont {
-                    font-family: 'RichEatinAllCaps';
-                    font-weight: normal;
-                    font-style: normal;
-                    font-size: 0.3em;
-                }
-            </style>
-            <g>
-                <text x="0" y="4" dy=".45em" class="minfont">Jobbe i team</text>
-                <line x1="0" y1="10" x2="100" y2="10" stroke="#000000" stroke-width="0.5" />
-                <circle id="Thomas" cx="30" cy="10" r="1.5" fill="#ff0000"/>
-                <circle id="Tobias" cx="30" cy="10" r="1.5" fill="#0080ff"/>
-                <circle id="Victor" cx="30" cy="10" r="1.5" fill="#CF8BFC"/>
-                <circle id="Rayan" cx="30" cy="10" r="1.5" fill="#14e810"/>
-                <circle id="Siren" cx="30" cy="10" r="1.5" fill="#f7f707"/>
-                <circle id="Kasper" cx="30" cy="10" r="1.5" fill="#11def5"/>
+<ul class="ul">
+    <li class="thomas">Thomas</li>
+    <li class="tobias">Tobias</li>
+    <li class="victor">Victor</li>
+    <li class="rayan">Rayan</li>
+    <li class="siren">Siren</li>
+    <li class="kasper">Kasper</li>
+</ul>
+<canvas id="report" height="1000" width="1000"></canvas>
+<!-- Her skrives alt innhold, som man ønsker å "tegne" på skjermen. -->
+<script>
+    <!-- Her skrives kode i JavaScript som "gir liv" til bilde på skjermen. -->
 
-                <text x="75" y="4" dy=".45em" class="minfont">Jobbe alene</text>
-            </g>
+    var canvas = document.getElementById('report');
+    var context = canvas.getContext('2d');
 
-        </svg>
-    </figure>
+    //Tekst til linjer
+    //Teksten i ' ' er synlig tekst.
+    //4 tegn høyere for at teksten ikke skal være på lija.
+    context.font = '14px serif';
+    context.fillText('Jobbe i team', 30, 35);
+    context.fillText('Fortell meg hele historien', 30, 110);
+    context.fillText('Inkluder meg i hele prosessen', 30, 190);
+    context.fillText('Jobbe til faste tider', 30, 270);
+    context.fillText('Kontinuerlig tilbakemelding', 30, 350);
+    context.fillText('Offentlig annerkjennelse', 30, 430);
 
-    <script>
-        // Pseudocode
-        // Modellering først: hvilke SVG elementer, hvor stort areal, posisjonring, hensyn til zooming ...
-        // 1) finn knaggen til svg elementet i HTML dokumentets DOM-tre
-        // 2) selektere og lagre knagger til alle gruppeelementer i svg
-        // (forutsetter modellering i forveien)
-        // 3) selektere og lagre knagger til circle-elementer i g-elementet
-        // (forutsetter modellering)
-        // 4) sette dorn-verdien fra inndata (JSON) til verdien som bestemmer sirkelens posisjon på linjen
-        let minsvg = document.getElementById("hwrsvg");
-        let glist = minsvg.getElementsByTagName("g");
-        let circles = glist[0].getElementsByTagName("circle")
-        console.log(circles[0].cx.baseVal.value);
+    context.fillText('Jobbe alene', 265, 35)
+    context.fillText('Kom til punktet', 240, 110)
+    context.fillText('Gi meg en oppgave', 220, 190)
+    context.fillText('Når jeg føler for det', 215, 270)
+    context.fillText('Etter lansering', 245, 350)
+    context.fillText('På tomannshånd', 235, 430)
 
-        // Mock JSON
-        const minJSON = '{"tora": "60"}';
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse (sist sett 2021-10-06)
-        const jsobj = JSON.parse(minJSON);
-        console.log(jsobj.tora);
-        toraValueForThomas = jsobj.tora;
-        toraValueForTobias = jsobj.tora;
-        toraValueForVictor = jsobj.tora;
-        toraValueForRayan = jsobj.tora;
-        toraValueForSiren = jsobj.tora;
-        toraValueForKasper = jsobj.tora;
-        // Dette kan ikke gjøres før inndata er lastet inn i nettleserens minneområdet
-        circles.Thomas.cx.baseVal.value = toraValueForThomas;
-        circles.Tobias.cx.baseVal.value = toraValueForTobias;
-        circles.Victor.cx.baseVal.value = toraValueForVictor;
-        circles.Rayan.cx.baseVal.value = toraValueForRayan;
-        circles.Siren.cx.baseVal.value = toraValueForSiren;
-        circles.Kasper.cx.baseVal.value = toraValueForKasper;
+    //Tegning av linjer
+    context.beginPath();
+    context.moveTo(30,50);
+    context.lineTo(330,50);
+
+    context.moveTo(30,130);
+    context.lineTo(330,130);
+    context.stroke();
+
+    context.moveTo(30,210);
+    context.lineTo(330,210);
+    context.stroke();
+
+    context.moveTo(30,290);
+    context.lineTo(330,290);
+    context.stroke();
+
+    context.moveTo(30,370);
+    context.lineTo(330,370);
+    context.stroke();
+
+    context.moveTo(30,450);
+    context.lineTo(330,450);
+    context.stroke();
+
+    //fetch - Thomas
+    fetch("https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.querySelector("#debug").innerText = "";
+
+            var X = 30 + parseInt(data.tora, 30);
+            var Y = 50;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.horp, 30);
+            var Y = 130;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
 
 
-        //  JSON fra link
-        fetch("https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf.json")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                circles.Thomas.cx.baseVal.value = data.tora;
+            var X = 30 + parseInt(data.poro, 30);
+            var Y = 210;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.forf, 30);
+            var Y = 290;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.korl, 30);
+            var Y = 370;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.oort, 30);
+            var Y = 450;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#ff0000";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
             });
-        fetch("https://bacit.info/hwr/20211009110017-a933787b61a351285706deb1ef63a10e.json")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                circles.Tobias.cx.baseVal.value = data.tora;
-            });
-        fetch("https://bacit.info/hwr/20211009110534-03185cd07d5d63f26ba2071f11e93435.json")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                circles.Victor.cx.baseVal.value = data.tora;
-            });
-        fetch("https://bacit.info/hwr/20211010104022-71e96f3e4de85ef8df6dae76d9fc5618.json")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                circles.Rayan.cx.baseVal.value = data.tora;
-            });
-        fetch("https://bacit.info/hwr/20211009111232-09d157480630fd37f941a1917d74a3be.json")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                circles.Siren.cx.baseVal.value = data.tora;
-            });
-        fetch("https://bacit.info/hwr/20211010105420-6f3d5e802b865db6f7f889073a18c24d.json")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                circles.Kasper.cx.baseVal.value = data.tora;
+
+    //Fetch - Tobias
+    fetch("https://bacit.info/hwr/20211009110017-a933787b61a351285706deb1ef63a10e.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.querySelector("#debug").innerText = "";
+            
+            var X = 30 + parseInt(data.tora, 30);
+            var Y = 50;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#0080ff";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.horp, 30);
+            var Y = 130;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#0080ff";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.poro, 30);
+            var Y = 210;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#0080ff";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+
+            var X = 70 + parseInt(data.forf, 30);
+            var Y = 290;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#0080ff";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.korl, 30);
+            var Y = 370;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#0080ff";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.oort, 30);
+            var Y = 450;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#0080ff";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            });      
+
+    //fetch - Victor
+    fetch("https://bacit.info/hwr/20211009110534-03185cd07d5d63f26ba2071f11e93435.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.querySelector("#debug").innerText = "";
+
+            var X = 30 + parseInt(data.tora, 30);
+            var Y = 50;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#CF8BFC";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.horp, 30);
+            var Y = 130;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#CF8BFC";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.poro, 30);
+            var Y = 210;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#CF8BFC";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+
+            var X = 30 + parseInt(data.forf, 30);
+            var Y = 290;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#CF8BFC";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.korl, 30);
+            var Y = 370;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#CF8BFC";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.oort, 30);
+            var Y = 450;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#CF8BFC";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            });    
+
+    //fetch - Rayan
+    fetch("https://bacit.info/hwr/20211010104022-71e96f3e4de85ef8df6dae76d9fc5618.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.querySelector("#debug").innerText = "";
+
+            var X = 30 + parseInt(data.tora, 30);
+            var Y = 50;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#14e810";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.horp, 30);
+            var Y = 130;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#14e810";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.poro, 30);
+            var Y = 210;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#14e810";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+
+            var X = 30 + parseInt(data.forf, 30);
+            var Y = 290;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#14e810";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.korl, 30);
+            var Y = 370;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#14e810";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.oort, 30);
+            var Y = 450;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#14e810";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
             });
 
-    </script>
+    //fetch - Siren
+    fetch("https://bacit.info/hwr/20211009111232-09d157480630fd37f941a1917d74a3be.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+        console.log(data);
+        document.querySelector("#debug").innerText = "";
 
+            var X = 30 + parseInt(data.tora, 30);
+            var Y = 50;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#f7f707";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.horp, 30);
+            var Y = 130;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#f7f707";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.poro, 30);
+            var Y = 210;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#f7f707";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+
+            var X = 30 + parseInt(data.forf, 30);
+            var Y = 290;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#f7f707";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.korl, 30);
+            var Y = 370;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#f7f707";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.oort, 30);
+            var Y = 450;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#f7f707";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            });
+
+    //fetch - Kasper
+    fetch("https://bacit.info/hwr/20211010105420-6f3d5e802b865db6f7f889073a18c24d.json", {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.querySelector("#debug").innerText = "";
+
+            var X = 30 + parseInt(data.tora, 30);
+            var Y = 50;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            //farge til bruker
+            context.fillStyle = "#11def5";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.horp, 30);
+            var Y = 130;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#11def5";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+
+            var X = 30 + parseInt(data.poro, 30);
+            var Y = 210;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#11def5";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+
+            var X = 30 + parseInt(data.forf, 30);
+            var Y = 290;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#11def5";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.korl, 30);
+            var Y = 370;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#11def5";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+
+            var X = 30 + parseInt(data.oort, 30);
+            var Y = 450;
+            var R = 5;
+            context.beginPath();
+            context.arc(X, Y, R, 0, 2*Math.PI, false);
+            context.fillStyle = "#11def5";
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = "black";
+            context.stroke();
+            //context.closePath();
+             });  
+
+</script>
 </body>
 </html>
