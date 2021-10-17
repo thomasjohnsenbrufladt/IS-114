@@ -35,10 +35,10 @@
             background-color: #04AA6D;
             color: white;
         }
-
+        
+        /* Styler og definerer hvilke farger hvert navn representerer */
         ul li { display: inline; white-space: pre;font-size: 20px;}
         ul li:last-child:after { content: ""; }
-
 
         .thomas::before{
             content: "• ";
@@ -80,6 +80,7 @@
     <a class="active" href="./hwr-report.html">HWR-rapport</a>
 </div>
 
+    <!-- Lager klasse på navnene for å kunne style de individuelt i head -->
 <ul class="ul">
     <li class="thomas">Thomas</li>
     <li class="tobias">Tobias</li>
@@ -88,6 +89,8 @@
     <li class="siren">Siren</li>
     <li class="kasper">Kasper</li>
 </ul>
+    
+<!-- Oppretter canvas for å definere hvor og hvor stort område vi skal ha til å displaye dataen. -->
 <canvas id="report" height="1000" width="1000"></canvas>
 <!-- Her skrives alt innhold, som man ønsker å "tegne" på skjermen. -->
 <script>
@@ -96,9 +99,8 @@
     var canvas = document.getElementById('report');
     var context = canvas.getContext('2d');
 
-    //Tekst til linjer
-    //Teksten i ' ' er synlig tekst.
-    //4 tegn høyere for at teksten ikke skal være på lija.
+    
+    //Lager her linjene hvor sirklene skal vises. Skriver også teksten som skal stå ved linjene, og sier hvor det skal stå.
     context.font = '14px serif';
     context.fillText('Jobbe i team', 30, 35);
     context.fillText('Fortell meg hele historien', 30, 110);
@@ -114,7 +116,7 @@
     context.fillText('Etter lansering', 245, 350)
     context.fillText('På tomannshånd', 235, 430)
 
-    //Tegning av linjer
+    //Tegning av linjer. Setter lengden på linjene til 300 piksler.
     context.beginPath();
     context.moveTo(30,50);
     context.lineTo(330,50);
@@ -139,7 +141,9 @@
     context.lineTo(330,450);
     context.stroke();
 
-    //fetch - Thomas
+    //Fetcher dataen til Thomas. Måtte endre til "30" for å kunne vise dataen etter at vi endret lengden på linjene.
+    //Det defineres altså her hvor punktene skal vises. 
+    //Styler sirklene og bruker fargen som definerer personen det gjelder.
     fetch("https://bacit.info/hwr/20211009110647-251d11cdfa83a845d4d6bbaae3ddcacf.json", {cache: 'no-cache'})
         .then(response => response.json())
         .then(data => {
@@ -218,7 +222,7 @@
 
             });
 
-    //Fetch - Tobias
+    //Fetcher dataen til Tobias.
     fetch("https://bacit.info/hwr/20211009110017-a933787b61a351285706deb1ef63a10e.json", {cache: 'no-cache'})
         .then(response => response.json())
         .then(data => {
@@ -296,7 +300,7 @@
 
             });      
 
-    //fetch - Victor
+    //Fetcher dataen til Victor.
     fetch("https://bacit.info/hwr/20211009110534-03185cd07d5d63f26ba2071f11e93435.json", {cache: 'no-cache'})
         .then(response => response.json())
         .then(data => {
@@ -374,7 +378,7 @@
 
             });    
 
-    //fetch - Rayan
+    //Fetcher dataen til Rayan.
     fetch("https://bacit.info/hwr/20211010104022-71e96f3e4de85ef8df6dae76d9fc5618.json", {cache: 'no-cache'})
         .then(response => response.json())
         .then(data => {
@@ -452,7 +456,7 @@
 
             });
 
-    //fetch - Siren
+    //Fetcher dataen til Siren
     fetch("https://bacit.info/hwr/20211009111232-09d157480630fd37f941a1917d74a3be.json", {cache: 'no-cache'})
         .then(response => response.json())
         .then(data => {
@@ -530,7 +534,7 @@
 
             });
 
-    //fetch - Kasper
+    //Fetcher dataen til Kasper.
     fetch("https://bacit.info/hwr/20211010105420-6f3d5e802b865db6f7f889073a18c24d.json", {cache: 'no-cache'})
         .then(response => response.json())
         .then(data => {
