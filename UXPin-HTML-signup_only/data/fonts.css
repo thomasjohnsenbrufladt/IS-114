@@ -1,0 +1,10 @@
+@font-face {
+  font-family: G-Roboto-n5;
+  font-display: swap;
+  src: url('../data/fonts/roboto_v29_KFOlCnqEu92Fr1MmEU9vAx05IsDqlA.ttf');
+}
+@font-face {
+  font-family: G-Roboto-n4;
+  font-display: swap;
+  src: url('../data/fonts/roboto_v29_KFOmCnqEu92Fr1Me5WZLCzYlKw.ttf');
+}
