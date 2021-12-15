@@ -5,10 +5,15 @@
     <title>Sign-up</title>
 
     <style>
+
+    .p {
+    height: 5
+    }
+
      .signupbutton {
      display: inline-block;
      border: none;
-     padding: 25px 45px;
+     padding: 20px 45px;
      margin-bottom: 0;
      font-size: 24px;
      font-weight: normal;
@@ -66,7 +71,23 @@ color: #fff;
      border-color: 8C8C8C;
      }
 
+.clear, .clear1, .clear10, .clear15, .clear20, .clear30, .clear40, .clear 60, .clear 120, .clear240 {
+     clear: both;
+     font-size: 0;
+     line-height: 0;
+     }
 
+     .clear {height: 0;}
+     .clear1 {height: 1px;}
+     .clear10 {height: 10px;}
+     .clear15 {height: 15px;}
+     .clear20 {height: 20px;}
+     .clear30 {height: 20px;}
+     .clear40 {height: 40px;}
+     .clear60 {height: 60px;}
+     .clear120 {height: 120px;}
+     .clear240 {height: 240px;}
+     <!-- format for forskjellig spacing, brukes i inputs, mye bedre enn <br> -->
 
  </style>
 
@@ -76,7 +97,6 @@ color: #fff;
 <!--https://www.w3schools.com/howto/howto_css_register_form.asp-->
 <form action="action_page.php"> <!--php biten må sjekkes ut -->
 
-
     <div class="container">
 
         <img src="/images/signinpagepicture.png" alt="Pulse: Socialize now!" width="200" height="auto"
@@ -84,28 +104,42 @@ color: #fff;
         <h1>Relationships matter. Build yours.</h1>
 
         <p>Join Pulse now. It's free!</p>
-        <br> <!--Lager en linje mellom tekst og input former -->
-
+<div class="clear40">
         <label for="fname"></label> <!--Usikker på sammenhengen mellom label og input. Må gjøre research-->
         <input type="text" class="inputtext" name="firstname" id="fname" placeholder="First Name" required>
 
         <label for="lname"></label>
         <input type="text" class="inputtext" name="lastname" id="lname" placeholder="Last Name" required>
-        <br> <!--Pagebreak-->
-        <br>
+    </div>
+
+    <div class="clear40"></div>
         <label for="num"></label>
         <input type="tel" class=inputtext name="num" id="num" placeholder="Mobile number" required>
-        <br>
-        <br>
+
+    <div class="clear15"></div>
         <label for="pass"></label>
         <input type="password" class="inputtext" name="pass" id="pass" placeholder="Enter Password" required>
-        <br>
-        <br>
+
+        <div class="clear15"></div>
+        <!-- An element to toggle between password visibility -->
+   <input type="checkbox" onclick="myFunction()">Show Password
+        <div class="clear15"></div>
         <button type="submit" class="signupbutton">Create account</button>
-        <br> <!-- Nødvendig? -->
+
         <!-- <div class="tac" -- Nødvendig? -->
         <p class="tac">By signing up, you agree to our <a href="//legal/terms.html/" id="terms-link" target="_blank" rel="nofollow">Terms</a>. Learn how we collect, use and share your data in our <a href="//legal/datapolicy" id="privacy-link" target="_blank" rel="nofollow">Data Policy</a>.</p>
 </form>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("pass");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 
 </center>
 </body>
